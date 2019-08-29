@@ -107,18 +107,16 @@ By default, the deployment process overwrites all settings in the `env.php` file
 -  **Default**—`false`
 -  **Version**—Magento 2.2.0 and later
 
-Use this variable to configure how consumers process messages from the message queue.
-
-#### Possible values
+Configure how consumers process messages from the message queue by choosing one of the following options:
 
 - `false`—Consumers process available messages in the queue, close the TCP connection, and terminate. Consumers do not wait for additional messages to enter the queue, even if the number of processed messages is less than the `max_messages` value specified in the `CRON_CONSUMERS_RUNNER` deploy variable.
 
-- `true`—Consumers continue to process messages from the message queue until reaching the maximum number of messages (`max_messages`) specified in the `CRON_CONSUMERS_RUNNER` deploy variable before closing the TCP connection and terminating the consumer process. If the queue empties before reaching `max_messages` the consumer waits for more messages to arrive. If you use workers to run consumers instead of using a cron job, set this variable to true.
+- `true`—Consumers continue to process messages from the message queue until reaching the maximum number of messages (`max_messages`) specified in the `CRON_CONSUMERS_RUNNER` deploy variable before closing the TCP connection and terminating the consumer process. If the queue empties before reaching `max_messages`, the consumer waits for more messages to arrive. If you use workers to run consumers instead of using a cron job, set this variable to true.
 
 ```yaml
 stage:
   deploy:
-    CONSUMERS_WAIT_FOR_MAX_MESSAGES: true
+    CONSUMERS_WAIT_FOR_MAX_MESSAGES: false
 ```
 
 ### `CRYPT_KEY`
@@ -282,7 +280,7 @@ stage:
     LOCK_PROVIDER: "db"
 ```
 
-See [Configure the lock]({{page.baseurl}}/install-gde/install/cli/install-cli-subcommands-lock.html?itm_source=devdocs&itm_medium=quick_search&itm_campaign=federated_search&itm_term=lock%20provide#instgde-cli-lockconfig) in the _Install guide_.
+See [Configure the lock]({{page.baseurl}}/install-gde/install/cli/install-cli-subcommands-lock.html) in the _Install guide_.
 
 ### `MYSQL_USE_SLAVE_CONNECTION`
 
